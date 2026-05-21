@@ -109,6 +109,20 @@ def login():
         return jsonify({"message " : f"welcome {username}"})
     else: 
         return jsonify({"error": " Invalid Creadnnetials "}),401
+@app.route("/users", methods=["GET"])
+def get_users():
+    conn = db_connection()
+
+    users = conn.execute("SELECT * FROM students").fetchall()
+
+    result = []
+
+    for user in users:
+        result.append(dict(user))
+
+    conn.close()
+
+    return {"users": result}
     
 
 if __name__ =="__main__":   
