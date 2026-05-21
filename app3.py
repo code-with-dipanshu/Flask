@@ -109,11 +109,12 @@ def login():
         return jsonify({"message " : f"welcome {username}"})
     else: 
         return jsonify({"error": " Invalid Creadnnetials "}),401
+
 @app.route("/users", methods=["GET"])
 def get_users():
     conn = db_connection()
 
-    users = conn.execute("SELECT * FROM students").fetchall()
+    users = conn.execute("SELECT * FROM users").fetchall()
 
     result = []
 
